@@ -1114,6 +1114,11 @@ unix:!macx {
     -lmbedtls                                                                                   \
     -lmbedcrypto                                                                                \
 
+    COMPILER_VERSION = $$system($$QMAKE_CXX " -dumpversion")
+    if (versionAtLeast(COMPILER_MAJOR_VERSION, "9")) {
+         LIBS += -lstdc++fs
+    }
+
     #-------------------------------------------------------------------------------------------#
     # Determine which hidapi to use based on availability                                       #
     #   Prefer hidraw backend, then libusb                                                      #
